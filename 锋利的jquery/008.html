@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ .pink{
+ 	background-color: pink;
+ }
+ .default{
+ 	background-color: #ddd;
+ }
+ .selected{
+ 	background-color: red;
+ }
+	</style>
+</head>
+<body>
+<div class="container">
+	<table id="table1" class="table">
+		<caption>table</caption>
+		<thead>
+			<tr>
+				<th></th>
+				<th>name</th>
+				<th>sex</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="radio" name="check">
+				</td>
+				<td>jinks</td>
+				<td>male</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="radio" name="check">
+				</td>
+				<td>jam</td>
+				<td>female</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="radio" name="check">
+				</td>
+				<td>bob</td>
+				<td>male</td>
+			</tr>
+		</tbody>
+	</table>
+	<table id="table2" class="table">
+		<caption>table</caption>
+		<thead>
+			<tr>
+				<th></th>
+				<th>name</th>
+				<th>sex</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="radio" name="check1">
+				</td>
+				<td>jinks</td>
+				<td>male</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="radio" name="check1">
+				</td>
+				<td>jam</td>
+				<td>female</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="radio" name="check1">
+				</td>
+				<td>bob</td>
+				<td>male</td>
+			</tr>
+		</tbody>
+	</table>
+	<table id="table3" class="table">
+		<caption>table</caption>
+		<thead>
+			<tr>
+				<th></th>
+				<th>name</th>
+				<th>sex</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="checkbox" name="check2">
+				</td>
+				<td>jinks</td>
+				<td>male</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="check2">
+				</td>
+				<td>jam</td>
+				<td>female</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="check2">
+				</td>
+				<td>bob</td>
+				<td>male</td>
+			</tr>
+		</tbody>
+	</table>
+</div>	
+	<script>
+     $("#table1 tr:odd").addClass("pink");
+     $("#table1 tr:even").addClass("default");
+     $("#table1 tbody tr").click(function() {
+     	$(this).addClass("selected").siblings().removeClass("selected")
+     	.end().find(":radio").prop("checked",true);  //use end();
+     });
+
+     $("#table2 tbody tr").click(function() {
+     	$(this).find("td").has(":checked").parent().addClass("selected").siblings().removeClass("selected");
+     }); //use has() 
+
+     $("#table3 tbody tr").click(function() {
+     	var hasSelected = $(this).hasClass("selected");
+     	$(this)[hasSelected ? "removeClass" : "addClass"]("selected").find(":checkbox").prop("checked",!hasSelected);
+     })
+	</script>
+</body>
+</html>
