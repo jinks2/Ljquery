@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ 
+	</style>
+</head>
+<body>
+<div class="container">
+<div>
+		<button type="button" id="larger" class="btn btn-primary">larger</button>
+	<button type="button" id="smaller" class="btn btn-primary">smaller</button>
+</div>
+	<textarea id="text1" cols="20" rows="8"></textarea>
+
+	<div>
+			<button type="button" id="up" class="btn btn-primary">up</button>
+		<button type="button" id="down" class="btn btn-primary">down</button>
+	</div>
+		<textarea id="text2" cols="20" rows="8">
+			jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
+		</textarea>
+
+
+		<form action="">
+			<input type="checkbox" name="itmes" value="football">footbal
+			<input type="checkbox" name="itmes" value="basketball">basketball
+			<input type="checkbox" name="itmes" value="pingpong">pingpong
+			<button type="button" id="all" class="btn btn-default">select all</button>
+			<button type="button" id="all-not" class="btn btn-default">all not</button>
+			<button type="button" id="anti" class="btn btn-default">select anti</button>
+		</form>
+</div>
+	
+	<script>
+	/*
+      $("#larger").click(function() {
+      	 var $height = $("#text1").height();
+      	if($height < 400)
+      		$("#text1").height($height+50);  
+      });
+       $("#smaller").click(function() {
+      	 var $height = $("#text1").height();
+      	if($height > 50)
+      		$("#text1").height($height-50);
+      });
+      better
+*/
+        $("#larger").click(function() {
+      	if(!$("#text1").is("animated") && $("#text1").height() < 400)
+      		$("#text1").animate({height: "+=50"},400);  /**/
+      });
+       $("#smaller").click(function() {
+      	if(!$("#text1").is("animated") && $("#text1").height() > 50)
+      		$("#text1").animate({height: "-=50"},400);
+      });
+
+
+     $("#up").click(function() {
+     	if(!$("#text2").is("animated")) {
+     		$("#text2").animate({scrollTop: "-=50"},400);
+     	}
+     })
+     	$("#down").click(function() {
+     		if(!$("#text2").is("animated")) {
+     			$("#text2").animate({scrollTop: "+=50"},400);
+     		}
+     })
+
+
+     $("#all").click(function() {
+     	console.log(0);
+     	$("[name=itmes]:checkbox").prop("checked",true);  
+     	//use prop inteadof attr
+     })
+     $("#all-not").click(function() {
+     	console.log(1);
+     	$("[name=itmes]:checkbox").prop("checked",false);
+     })
+     $("#anti").click(function() {
+     	$("[name=itmes]:checkbox").each(function() {  //use each
+     		this.checked = !this.checked;
+     	})
+     })
+	</script>
+</body>
+</html>

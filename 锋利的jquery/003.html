@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ 	.redname{
+ 		background-color: red;
+ 	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul id="ul1" class="list-unstyled">
+			<li title="apple">apple</li>
+			<li title="orange">orange</li>
+			<li title="banana">banana</li>
+		</ul>
+		<button id="btn1" class="btn btn-primary">btn</button>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<button id="btn2" class="btn btn-primary">btn</button>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<ul class="list-unstyled" id="ul2">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<button id="btn3" class="btn btn-primary">btn</button>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<button id="btn4" class="btn btn-primary">btn</button>
+		<span>span</span>
+
+		<div class="input-group">
+		  <span class="input-group-addon">
+		  	Address
+		  </span>
+			<input type="text" class="form-control" placeholder="please enter address">
+		</div>
+
+
+
+		<div class="input-group">
+		  <span class="input-group-addon">
+		  	Address
+		  </span>
+			<input type="text" class="form-control" id="txt">
+		</div>
+
+
+	<button id="btn5" class="btn btn-primary">btn</button>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+
+
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<button id="btn6" class="btn btn-primary">btn</button>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+
+</div>
+	<script>
+      console.log($("li[title]").attr("title"));
+      //just return the first matched one
+
+      //insert DOM is for every matched Element
+
+      $("#ul1").append("<li>watermelon</li>")
+      //appendTo
+
+      $("#ul1").prepend("<li>pear</li>")
+      //prependTo
+
+      $("#ul1").after("<ul>ul after</ul>")
+      //insertAfter
+
+      $("#ul1").before("<ul>ul before</ul>");
+      //insertBefore
+
+    	$("#btn1").click(function(){
+      	$(this).next().find("li:eq(1)").remove();
+   		}); 
+   		//if use detach(),still remian detail and event
+
+   		$("#btn2").click(function(){
+      	$(this).next().find("li:eq(1)").empty();
+   		});
+   		//not delete,just clear the node
+
+   		$("#ul2").children().click(function() {
+   			$(this).clone().appendTo("#ul2")
+   			//$(this).clone(true).appendTo("#ul2");
+   		})
+
+   		$("#btn3").click(function() {
+   			$(this).next().find("li:eq(1)").replaceWith("<li>new</li>");
+   		})//replaceAll;all need binding new event
+
+
+   		//wrap,wrapAll,wrapInner
+
+   		//attr(a,b) , removeAttr()
+
+   		$("#btn4").click(function() {
+   			$(this).next().toggle();
+   		})
+
+   		//hasClass(a) === is(".a")
+
+      
+   		$("#txt").blur(function() {
+   			if($(this).val() === this.defaultValue) {
+   				$(this).val("please enter address!");
+   			}
+   		}).focus(function() {
+   			if($(this).val() === "please enter address!") {
+   				$(this).val(this.defaultValue);
+   			}
+   		}) //use this.defaultValue
+
+   		$("#btn5").click(function() {
+   			$(this).next().children(":eq(1)").addClass('redname');
+   		}) //children: all direct children
+
+
+   		//next,prev
+      
+      $("#btn6").click(function () {
+      	$(this).siblings().addClass('redname');
+      	//$(this).siblings(":eq(2)").addClass('redname');
+      })
+
+      //parent,parents,closest
+
+	</script>
+</body>
+</html>

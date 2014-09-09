@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ 		.container{
+ 			margin-top: 10px;
+ 		}
+ 		.redName{
+ 			background-color: red;
+ 		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="input-group">
+		<span class="input-group-addon">
+			<input type="checkbox"/>
+		</span>
+		<input type="text" class="form-control"/>
+	</div>
+	<form>
+		<input type="text">
+		<input type="password">
+		<input type="password">
+		<input type="checkbox">
+		<button type="button" class="btn btn-default">button</button>
+	</form>
+	<div id="body">
+		<ul class="list-unstyled">
+			<li><a href="#">A</a></li>
+			<li><a href="#">B</a></li>
+			<li><a href="#">C</a></li>
+			<li><a href="#">D</a></li>
+			<li><a href="#">E</a></li>
+			<li><a href="#">F</a></li>
+			<li><a href="">Ohter</a></li>
+		</ul>
+		<div id="click">
+			<a href="">show all</a>
+		</div>
+	</div>
+</div>
+<button  id="btn1" class="btn btn-primary">button</button>
+<ul class="list-unstyled">
+	<li><a href="#">first-child</a></li>
+	<li><a href="#">secend-child</a></li>
+</ul>
+<button  id="btn2" class="btn btn-primary">button</button>
+<ul class="list-unstyled">
+	<li><a href="#">first</a></li>
+	<li><a href="#">secend</a></li>
+	<li><a href="#">third</a></li>
+</ul>
+<button  id="btn3" class="btn btn-primary">button</button>
+<ul class="list-unstyled">
+	<li><a href="#" data>1</a></li>
+	<li><a href="#">2</a></li>
+	<li><a href="#">3</a></li>
+</ul>
+
+	<script>
+      $("input[type=checkbox]").click(function() {
+      	$txt = $(this).parent().next();
+      	if($(this).is(":checked")) {
+      		$txt.val("it is checked!");
+      	} else {
+      		$txt.val("");
+      	}
+      })
+
+
+      $("button[type=button]").click(function() {
+      	 	//there are an blank
+      	console.log($("form :text").length);
+      	console.log($("form :password").length);
+      	console.log($("form :button").length);
+      	//....
+      })
+
+
+      var $some = $("#body ul li:gt(2):not(:last)")    //gt ,lt ,eq
+      $some.hide();
+      $("#click a").click(function() {
+      	if($some.is(":visible")) {
+      		$some.hide().children().removeClass("redName");
+      		$(this).text("show all");
+      	} else {
+      		$some.show().children().addClass("redName");
+      		$(this).text("show some");
+      	}
+      	return false;
+      })
+
+
+
+      $("#btn1").click(function() {
+      	$(this).next().find("li:eq(1)").children().addClass("redName"); //eq(n), n begin with 0
+      })  
+   
+      $("#btn2").click(function() {
+      var $txt =$("a").filter(":contains(first),:contains(secend)");
+      if($txt.hasClass("redName")) {
+      	 $txt.removeClass("redName");
+      } else {
+      	 $txt.addClass("redName");
+      }
+      }) //
+
+      $("#btn3").click(function() {
+      	$(this).next().find("a").filter("[data]").addClass("redName");
+      })
+
+	</script>
+</body>
+</html>

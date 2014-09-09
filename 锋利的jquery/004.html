@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+	#main{
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a id="point-a" href="#" point="this is point">title</a>
+		<div class="col-md-3">
+		<ul class="list-group">
+			<li id="main" class="list-group-item list-group-item-success">
+				main
+			</li>
+			<li class="list-group-item">
+				Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+			</li>
+		</ul>
+		</div>
+		<a id="link" href="http://www.google.com">google</a>
+
+		<button type="button" class="btn btn-success">success</button>
+		<button type="button" class="btn btn-info">info</button>
+		
+		<div id="animate" class="col-md-3" style="background-color:pink;width:200px;height:200px">
+    col-md-3:position:relative
+		</div>
+		<div id="callback" class="col-md-3" style="background-color:yellow;width:200px;height:200px">
+			col-md-3:position:relative
+		</div>
+	</div>
+	
+<script>
+/**/
+			var x = 10,y = 20; 
+      $("#point-a").mouseover(function(event) {
+      	var point = "<span id=point>"+$(this).attr("point")+"</span>";
+      	$("body").append(point);
+      	$("#point").css({
+      		"position":"absolute",
+      		"border":"1px solid black",
+      		"top": (event.pageY+y) + "px",
+      		"left": (event.pageX+x) + "px"
+      	}).show("fast");
+      }).mouseout(function(event) {
+      	$("#point").remove();
+      }).mousemove(function(event) {
+      	$("#point").css({
+      		"top": (event.pageY+y) + "px",
+      		"left": (event.pageX+x) + "px"
+      	})
+      });
+
+/**/
+      $("#main").hover(function() {
+      	$(this).next().toggle();
+      }).click(function() {
+      	$(this).next().toggle();
+      })
+      //slideToggle,fadeToggle
+
+     $("#link").click(function(event) {
+     		event.preventDefault();
+     	   //return false;
+         
+     })
+
+// event.stopPropagation(),event.preventDefault()
+
+/**/
+
+     $(".btn-success").click(func1 = function() {
+     	alert("1");
+     })
+     $(".btn-success").click(fun2 = function() {
+     	alert("2");
+     })
+     //if many event have same func,can use: bind("click mouseup .. ",function(){}) ;
+
+     $(".btn-info").click(function() {
+     	$(".btn-success").unbind("click",func1);
+     	alert("it work!");
+     })
+
+
+/**/
+   $("#animate").click(function() {
+   	$(this).animate({left:"400px",heigth:"200px",opacity:"0.5"},3000)
+   	.animate({top:"200px",width:"200px"},300)
+   	.animate({right:"200px"}, 400);
+   	//the last one can not work
+  
+   }) 
+
+  //check: is(":animated")
+/**/
+ $("#callback").click(function() {
+ 	$(this).animate({top:"+=200px",right:"-=100px"}, 1000,function() {
+ 		$(this).css("border","5px solid blue");
+ 	})
+ })//use callback function
+
+
+</script>
+</body>
+</html>

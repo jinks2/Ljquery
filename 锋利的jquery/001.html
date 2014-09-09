@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+    .current{
+    	background-color: pink;
+    }
+    ul{
+    	list-style: none;
+    }
+	</style>
+</head>
+<body>
+	<div class="panel panel-primary">
+		<ul class="menu">
+		  <li class="level1">
+		   <div class="panel-heading"><a href="" class="panel-title">shirt</a></div>
+			<ul class="level2 panel-body">
+				<li><a href="">short shirt</a></li>
+				<li><a href="">long shirt</a></li>
+				<li><a href="">T shirt</a></li>
+			</ul>
+		  </li>
+		  <li class="level1">
+		   <div class="panel-heading"><a href="" class="panel-title">coat</a></div>
+		  	<ul class="level2 panel-body">
+		  		<li><a href="">inner coat</a></li>
+		  		<li><a href="">out coat</a></li>
+		  		<li><a href="">sports coat</a></li>
+		  	</ul>
+		  </li>
+		  <li class="level1">
+		  	<div class="panel-heading"><a href="" class="panel-title">pants</a></div>
+		  	<ul class="level2 panel-body">
+		  		<li><a href="">cow pants</a></li>
+		  		<li><a href="">sports pants</a></li>
+		  		<li><a href="">short pants</a></li>
+		  	</ul>
+		  </li>
+		</ul>
+	</div>	
+	<script>
+       $('.level1 a.panel-title').click(function() {
+       	   $(this).addClass("current").parent().next().show().parent().siblings()
+       	   .find('a').removeClass('current').parent().next().hide();
+       	   return false;
+       }).parent().siblings().hide();
+	</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ h3{
+ 	display: inline-block;
+ 	margin-top: 0px;
+ }
+ ol{
+ 	display: inline-block;
+ 	margin:0px 40px 0px -20px;
+ }
+ ol li{
+ 	border:2px solid #fff;
+ 	background-color: #ccc;
+ 	border-radius: 10px;
+ 	width: 12px;
+ 	height: 12px;
+ 	display: inline-block;
+ }
+  .lightColor{
+ 	background-color: pink;
+ }
+ ul{
+ 	height: 100px;
+ 	width: 1000px;
+ 	padding-left:0px;  /**/
+ }
+ .list{
+ 	position: relative;  /*must add this can use animate*/
+ 	width:240px;
+ }
+ #main{
+ 	overflow: hidden;
+ 	width:244px;  /*the image have 1px blank*/
+ }
+ .list li {
+ 	display: inline-block;
+ 	height: 100px;
+	margin:0px;
+ }
+ .list li img{
+ 	width: 120px;
+ 	height: 100px;
+ 	border:1px solid black;
+ }
+	</style>
+</head>
+<body>
+<div class="container">
+			<h3>Animate</h3>
+			<ol class="nav-list">
+				<li class="lightColor"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ol>
+			<div class="btn-group">
+				<button type="button" id="left" class="btn btn-default">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</button>
+				<button type="button" id="right" class="btn btn-default">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</button>
+			</div>
+			<div id="main">
+			<div class="list">
+			<ul>
+				<li><img src="../img/product1.png" /></li>
+				<li><img src="../img/product2.png" /></li>
+				<li><img src="../img/product3.png" /></li>
+				<li><img src="../img/product4.png" /></li>
+				<li><img src="../img/product5.png" /></li>
+				<li><img src="../img/product6.png" /></li>
+			</ul>
+			</div>
+			</div>
+</div>
+
+
+				
+<script>
+			var index = 1;
+      $("#right").click(function() {
+      	if(index<5) {
+      		$(".list").animate({left: "-=124px"},"fast");
+      		$(".lightColor").removeClass("lightColor")
+      		.next().addClass("lightColor");
+      	}
+      	index++;
+      	if(index > 5) {
+      		$(".list").animate({left:"+=496px"},"fast");
+      		$(".lightColor").removeClass("lightColor")
+      		.siblings(":first").addClass("lightColor");
+      		index = 1;
+      	}
+      });
+      $("#left").click(function() {
+      	if(index>1) {
+      		$(".list").animate({left: "+=124px"},"fast");
+      		$(".lightColor").removeClass("lightColor")
+      		.prev().addClass("lightColor");
+      	}
+      	index--;
+      	if(index<1) {
+      		$(".list").animate({left:"-=496px"},"fast");
+      		$(".lightColor").removeClass("lightColor")
+      		.siblings(":last").addClass("lightColor");
+      		index = 5;
+      	}
+
+      })
+
+	</script>
+</body>
+</html>
