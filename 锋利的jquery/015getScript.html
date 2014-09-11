@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<p><input type="button" id="send" value="load"></p>
+	<p>comments:</p>
+	<div id="res"></div>
+
+
+	<script>
+	$("#send").click(function() {
+		$.getScript("015test.js",function() {
+			console.log("load");
+		});
+	})
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" onclick="Ajax()" value="submit"/>
+
+	<script>
+  function Ajax() {
+  	var XHR  =  new XMLHttpRequest();
+  	if(XHR !== null) {
+  		XHR.open("GET","011test.php",true);
+  		XHR.onreadystatechange = callBack;
+  		XHR.send(null);
+  	}
+  	 function callBack() { //here can't use 'var callback = function()''
+  		if(XHR.readyState === 4 && XHR.status === 200) {
+  			alert(XHR.responseText);
+  		} 
+  	}
+  }
+  /*
+   1. new a instance
+   2. call:
+    open();
+    onreadystatechange = callback;
+    send;
+   3.set callback
+    readyState && status;
+    responseText;
+  */
+	</script>
+</body>
+</html>

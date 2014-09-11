@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+	.parent{
+		background-color: pink;
+		cursor:pointer;
+	}
+	.selected{
+		background-color: red;
+	}
+	.check{
+		background-color: yellow;
+	}
+	</style>
+
+</head>
+<body>
+<div class="container">
+	<table id="table1" class="table">
+		<thead>
+			<tr>
+				<th>header</th>
+				<th>header</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="parent">
+				<td>num1</td>
+				<td>num1</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr class="parent">
+				<td>num1</td>
+				<td>num1</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr class="parent">
+				<td>num1</td>
+				<td>num1</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table id="table2" class="table">
+		<thead>
+			<tr>
+				<th>header</th>
+				<th>header</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="parent">
+				<td>num1</td>
+				<td>num1</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr class="parent">
+				<td>num1</td>
+				<td>num1</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr class="parent">
+				<td>num1</td>
+				<td>num1</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+			<tr>
+				<td>data</td>
+				<td>data</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table id="table3" class="table">
+		<thead>
+			<tr>
+				<th>
+					select <input type="text" id="select">
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>aabb</td>
+			</tr>
+			<tr>
+				<td>bbcc</td>
+			</tr>
+			<tr>
+				<td>ccdd</td>
+			</tr>
+			<tr>
+				<td>eedd</td>
+			</tr>
+			<tr>
+				<td>eeff</td>
+			</tr>
+			<tr>
+				<td>ffgg</td>
+			</tr>
+			<tr>
+				<td>gghh</td>
+			</tr>
+		</tbody>
+	</table>
+</div>	
+	<script>
+    $("#table1 tbody tr:not(.parent)").hide();
+    $("#table1 tbody tr.parent").click(function() {
+    	$(this).toggleClass("selected").nextUntil(".parent").toggle();  //next,nextAll,nextUnitl
+    })  //use :not(),nextUntil(),toggleClass()
+
+
+
+    $("#table2 tbody tr:not(.parent)").hide();
+    $("#table2 tbody tr.parent").click(function() { 
+    	$(this).toggleClass("selected").prevAll(":not(.parent)")   //use toggleClass not addClass
+    	.hide().end().siblings().removeClass("selected").end()    //use prev
+    	.nextUntil(".parent").toggle().next().nextAll(":not(.parent)").hide();
+    	//when use siblings(),nextAll()...select many elements; if use end(), select the element before select them;
+    	//if use next(),select the next of the first element of them; if use prev(), select the prev of the last element of them
+    })
+
+
+    $("#select").keyup(function() {
+    	console.log(0);
+    	var $val = $(this).val();
+    	if($val === "") {
+    		$("#table3 tbody tr").show();
+    	} else {
+    		$("#table3 tbody tr").filter(":not(:contains('"+($(this).val())+"'))").hide();
+    	} //use filter,contains
+    	
+    }).keyup();  //use  last use ".keyup()",if have serve to keep select words, when this page reload ,it will remian last selected
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<form action="#" id="form1">
+		<p>comment:</p>
+		<p>name:<input type="text" name="username" id="username"/></p>
+		<p>content: <textarea name="content" id="content" cols="20" rows="2"></textarea></p>
+		<p><input type="button" id="send" value="submit"/></p>
+	</form>
+	<div class="comment">return:
+		<div id="res"></div>
+	</div>
+
+	<script>
+	$("#send").click(function() {
+		$.get("018get.php",$("#form1").serialize(),function(data,status) {
+				$("#res").html(data); 
+		});
+		console.log($("#form1").serialize()); //accroding "name"
+	})
+
+	</script>
+</body>
+</html>

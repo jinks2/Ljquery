@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<form action="#" id="form1">
+		<p>comment:</p>
+		<p>name:<input type="text" id="username"/></p>
+		<p>content: <textarea name="content" id="content" cols="20" rows="2"></textarea></p>
+		<p><input type="button" id="send" value="submit"/></p>
+	</form>
+	<div class="comment">return:
+		<div id="res"></div>
+	</div>
+
+	<script>
+	$("#send").click(function() {
+		$.post("014post-html.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		},function(data,status) {
+			$("#res").html(data); //return html type data;
+			console.log(data,status);
+		})
+	})
+
+	$("#send").click(function() {
+		$.post("014post-xml.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		},function(data,status) {
+			var username = $(data).find("comment").attr("username");
+			var content = $(data).find("comment content").text();
+			var txtHtml = "<div>"+username+"<p>"+content+"</p></div>";
+			$("#res").html(txtHtml); //return xml type data;
+			console.log(data,status);
+		},"xml");  //can add this or not
+	})
+
+	$("#send").click(function() {
+		$.post("014post-json.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		},function(data,status) {
+			var username = data.username;
+			var content = data.content;
+			var txtHtml = "<div>"+username+"<p>"+content+"</p></div>";
+			$("#res").html(txtHtml); //return json type data;
+			console.log(data,status);
+		},"json");  //must add this
+	})
+
+	$("#send").click(function() {
+		$("#res").load("014post-html.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		}); 
+	})
+	</script>
+</body>
+</html>

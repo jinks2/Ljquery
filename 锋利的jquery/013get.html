@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+	<form action="#" id="form1">
+		<p>comment:</p>
+		<p>name:<input type="text" id="username"/></p>
+		<p>content: <textarea name="content" id="content" cols="20" rows="2"></textarea></p>
+		<p><input type="button" id="send" value="submit"/></p>
+	</form>
+	<div class="comment">return:
+		<div id="res"></div>
+	</div>
+
+	<script>
+	$("#send").click(function() {
+		$.get("013get-html.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		},function(data,status) {
+			$("#res").html(data);  //return html type data;
+			console.log(data,status);
+		})
+	})
+
+	$("#send").click(function() {
+		$.get("013get-xml.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		},function(data,status) {
+			var username = $(data).find("comment").attr("username");
+			var content = $(data).find("comment content").text();
+			var txtHtml = "<div>"+username+"<P>"+content+"</P></div>";
+			$("#res").html(txtHtml); //return xml type data;
+			console.log(data,status);
+		})
+	})
+
+	$("#send").click(function() {
+		$.get("013get-json.php",{
+			username: $("#username").val(),
+			content: $("#content").val()
+		},function(data,status) {
+			var username = data.username;
+			var content = data.content;
+			console.log(data.username,content);
+			var txtHtml = "<div>"+username+"<P>"+content+"</P></div>";
+			$("#res").html(txtHtml); //return json type data;
+			console.log(data,status);
+		},"json") //add type
+	})
+
+
+	$("#send").click(function(){
+	  $("#resText").load("013get-html.php?username="+$('#username')
+	  	.val()+"&content="+$('#content').val());
+	 })
+	</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<p><input type="button" id="send" value="load"></p>
+	<p>comments:</p>
+	<div id="res"></div>
+
+
+	<script>
+	$("#send").click(function() {
+		$.getJSON("016test.json",function(data) {
+			console.log(data);
+			$("#res").empty();
+			var html = " ";
+			$.each(data,function(index,comment) {
+				console.log(index,comment);
+				html += "<div>" + comment["username"] +"<p>" +
+				comment["content"] + "</p></div>";
+			})
+			$("#res").html(html);
+		});
+	})
+
+	/**jsonp*/
+	$("#send").click(function() {
+		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=car&tagmode=any&format=json
+			&jsoncallback=?",function(data) {
+				//jquery will use the function name instead of "?"
+				$.each(data,items,function(i,item) {
+					$("<img/>").attr("src",item.media.m).appendTo("#res");
+					if(i === 3) return false;
+				})
+			})
+	})
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<link rel="stylesheet" id="skin-css"/>
+	<style>
+ .content{
+ 	border:1px solid black;
+ 	width: 200px;
+ 	height: 200px;
+ }
+ #traget li{
+ 	background-color: pink;
+ 	cursor: pointer;
+ 	padding: 5px;
+ }
+ .high{
+ 	background-color: red;
+ }
+ #skin li{
+ 	display: inline-block;
+ }
+ .title {
+ 	margin: 10px 0px 0px 30px;
+ 	display: inline-block;
+ 	width: 100px;
+ 	height: 50px;
+ 	border:1px solid black;
+ 	text-align: center;
+ 	line-height: 50px;
+ }
+ #skin-0{
+	background-color: pink;
+	cursor: pointer;
+ }
+  #skin-1{
+ 	background-color: yellow;
+ 	cursor: pointer;
+ }
+  #skin-2{
+ 	background-color: green;
+ 	cursor: pointer;
+ }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="btn-group">
+			<button class="btn btn-default" id="larger">larger</button>
+			<button class="btn btn-default" id="smaller">smaller</button>
+		</div>
+		<pre>
+			Flint is a hard, sedimentary cryptocrystalline 
+			form of the mineral quartz, categorized as a variety of chert.
+		</pre>
+
+
+		<ul class="list-inline" id="traget">
+			<li>music</li>
+			<li>sports</li>
+			<li>movie</li>
+		</ul>
+		<div>
+			<textarea class="content">music</textarea>
+			<textarea class="content">sports</textarea>
+			<textarea class="content">movie</textarea>
+		</div>
+
+
+
+		<ul id="skin">
+			<li id="skin-0">pink-green</li>
+			<li id="skin-1">yellow-pink</li>
+			<li id="skin-2">green-yellow</li>
+		</ul>
+		<div class="title">
+			music
+		</div>
+		<div class="title">
+			movie
+		</div>
+	</div>
+	<script>
+      $(".btn-default").click(function() {
+      	var $fontSize = $("pre").css("font-size");
+      	var $num = parseInt($fontSize,10);
+      	var $unit = $fontSize.slice(-2);
+      	if($(this).attr("id") === "larger" && $num <= 22) $num += 2;
+      	if($(this).attr("id") === "smaller" && $num >= 12) $num -= 2;
+      	$("pre").css("font-size",$num+$unit); //set css;not use $("pre").css("font-size") = .....
+      });
+
+
+     
+      $("#traget li:first").addClass("high");
+			$(".content:not(:first)").hide();
+      $("#traget li").hover(function() {  //click
+      	$(this).addClass("high").siblings().removeClass("high");
+      	$(".content:eq("+$(this).index()+")").show().siblings().hide();
+      });  //use index() ;also can use "$('li').index(this)" ,but it meaning must defined the scope of 'li'"
+     
+
+
+			$("#skin li").click(function() {
+				$(this).addClass("glyphicon glyphicon-ok").siblings().removeClass("glyphicon glyphicon-ok");
+				$("#skin-css").attr("href","skin/"+this.id+".css");
+			});     
+	</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+	<button type="button" id="getall">getall</button>
+	<button type="button" id="getsome">getsome</button>
+	<div id="result"></div>
+
+	<script>
+  $("#getall").click(function() {
+  	$("#result").load("002test.html",{name:"jinks"},function(res,status,xhr){
+  		console.log(res,status,xhr);
+  	})
+  });
+  //post: load(url,data,[callback])
+  //get: load(url,[callback])
+  //callback: function(responseText,textStatus,XHR)
+  $("#getsome").click(function() {
+  	$("#result").load("012test.html .para");
+   //"url selector"
+  })
+	</script>
+</body>
+</html>
