@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+		<table id="table1">
+			<tr>
+				<td>1.1</td>
+				<td>1.2</td>
+			</tr>
+			<tr>
+				<td>2.1</td>
+				<td>2.2</td>
+			</tr>
+		</table>
+
+		<table id="table2">
+			<tr>
+				<td>1.1</td>
+				<td>1.2</td>
+			</tr>
+			<tr>
+				<td>2.1</td>
+				<td>2.2</td>
+			</tr>
+		</table>
+
+		<table id="table3">
+			<tr>
+				<td>1.1</td>
+				<td>1.2</td>
+			</tr>
+			<tr>
+				<td>2.1</td>
+				<td>2.2</td>
+			</tr>
+		</table>
+
+
+	<div id="d1" data-role="page" data-last-value="43"
+	data-options='{"name":"john"}'></div>
+	<button id="btn">click</button>
+	<script>
+
+/*
+
+		// check jquery object
+		//not use this 
+		if($content) {}
+		//use this
+		if($content.length) {}
+*/
+
+		//binding event
+		//not use this
+		$("#table1 td").click(function() {
+			$(this).css("background","red");
+		});//if has many "tr",will bingding many event
+		//use this just to binding one event
+
+		$("#table2").click(function(e) {
+			$(e.target).css("background","red");
+		});	
+
+		//or better than jquery1.7
+		$("#table3").on("click","td",function() {
+			$(this).css("background","red");
+		})
+
+
+		//use html5 property:data with jquery:date();
+		$("#btn").click(function() {
+			var $role = $("#d1").data("role");
+			var $last = $("#d1").data("lastValue");
+			var $name = $("#d1").data("options").name;
+			console.log($role,$last,$name);
+		})
+
+
+		//you'd better use js than jquery
+	</script>
+</body>
+</html>

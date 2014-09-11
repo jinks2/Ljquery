@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+	
+	<a href="http://www.google.com/">click</a>
+
+	<input type="text" class="text1">
+
+
+	<script>
+
+//prohibit contextmenu
+	$(document).bind("contextmenu",function(e) {
+			return false;
+	});
+
+//open in _blank
+ $("a[href^='http://']").attr("target","_blank");
+
+
+//foucs and blur 
+$("input.text1").val("Enter your search text here");
+textFill($("input.text1"));
+
+function textFill(input) {
+	var originalvalue = input.val();
+	input.focus(function() {
+		if($.trim(input.val()) === originalvalue) {
+			input.val("");
+		}
+	}).blur(function() {
+		if($.trim(input.val()) === "") {
+			input.val(originalvalue);
+		}
+	})
+}//use $.trim()
+
+//
+
+
+	</script>
+</body>
+</html>

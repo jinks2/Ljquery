@@ -24,6 +24,12 @@
 		console.log($("#form1").serialize()); //accroding "name"
 	})
 
+	$("#send").click(function() {
+		$.get("018get.php","username="+encodeURIComponent($("#username").val()) + "&content="+encodeURIComponent($("#content").val()),function(data,status) {
+				$("#res").html(data); 
+		}); //serialize() has use  encodeURIComponent automatically
+	})
+
 	</script>
 </body>
 </html>

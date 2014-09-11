@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	
+	<input type="checkbox" name="check" value="1">music<br/>
+	<input type="checkbox" name="check" value="2">movie<br/>
+	<input type="checkbox" name="check" value="3">picture<br/>
+	<input type="checkbox" name="check" value="4">vedio<br/>
+
+	<input type="radio" name="radio" value="1">music<br/>
+	<input type="radio" name="radio" value="2">movie<br/>
+	<input type="radio" name="radio" value="3">picture<br/>
+	<input type="radio" name="radio" value="4">vedio<br/>
+
+	<input type="button" id="send" value="submit">
+	<input type="button" id="show" value="show">
+	<div id="res"></div>
+	<script>
+	$("#send").click(function() {
+		var $data = $(":checkbox,:radio").serialize();
+		console.log($data);
+	});
+
+//serializeArray() //return json type data :{name,value}
+	$("#show").click(function() {
+		var fields = $(":checkbox,:radio").serializeArray();
+		console.log(fields);
+		$.each(fields,function(i,field) {
+			$("#res").append(field.value+",");
+			console.log(field.value);
+		})
+	});
+	
+
+
+	</script>
+</body>
+</html>
