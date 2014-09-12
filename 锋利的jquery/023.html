@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<style>
+	
+	</style>
+</head>
+<body>
+	<input type="text" class="text">
+	<input type="password" class="text">
+	<textarea class="text" cols="30" rows="10"></textarea>
+	
+	<script>
+
+	jQuery.fn.maxLength = function(max) {
+		this.each(function() {
+			var tag = this.tagName.toLowerCase();
+			var type = this.type ? this.type.toLowerCase() : null;
+			if(tag === "input" && type === "text" || type === "password") {
+				this.maxLength = max;
+			}
+		})
+	};
+	$(".text").maxLength(10);
+
+	</script>
+
+</body>
+</html>

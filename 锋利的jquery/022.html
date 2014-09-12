@@ -4,6 +4,18 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<style>
+	.larger{
+		background-color: pink;
+	}
+	.center{width: 200px;height: 200px;background-color: red;}
+	.down{
+		width: 100px;height: 100px;background-color: #ccc;
+	}
+	.aaa{color: black;}
+	.bbb{color: yellow;}
+	.ccc{color:green;}
+	</style>
 </head>
 <body>
 	
@@ -11,7 +23,21 @@
 
 	<input type="text" class="text1">
 
+	<div class="a"><a href="http://www.google.com">google</a></div>
 
+	<div class="center">
+		
+	</div>
+
+	<div class="down">
+		
+	</div>
+
+
+	<input type="text" id="enter">
+
+
+	<div id="panel" style="width:150px;height:150px;background-color:red;display:none"><button>Close</button></div>
 	<script>
 
 //prohibit contextmenu
@@ -19,8 +45,10 @@
 			return false;
 	});
 
+
 //open in _blank
  $("a[href^='http://']").attr("target","_blank");
+
 
 
 //foucs and blur 
@@ -40,9 +68,90 @@ function textFill(input) {
 	})
 }//use $.trim()
 
+
+
+//get coordinate of mouse
+$(document).mousemove(function(event) {
+	console.log("x: "+ event.pageX + " y: " + event.pageY);
+});
+
+
+//
+$("div.a").click(function() {
+	window.location = $(this).find("a").attr("href");
+	return false;
+})
+
+
+//change style according to window width
+function checkWindowSize() {
+	if($(window).width() > 1000) {
+		$("body").addClass("larger");
+	} else {
+		$("body").removeClass("larger");
+	}
+}
+$(window).resize(checkWindowSize);
+
+
+
+//make it in the center of the screen
+jQuery.fn.center = function() {
+	this.css("position","absolute");
+	this.css("top",($(window).height() - this.height())/ 2+$(window).scrollTop()+"px");
+	this.css("left",($(window).width() - this.width())/ 2+$(window).scrollLeft()+"px");
+	return this;
+
+}
+$(".center").center();
+
+
+
+// close the effect of animate
+$(".center").click(function() {
+	$(this).animate({"left":"-=100px"});
+}) 
+jQuery.fx.off = true;
+
+
+
+//check mousedown
+$(".down").mousedown(function(e) {
+	alert(e.which); //1,2,3
+});
+
+
+
+//use keyborder enter
+$("input#enter").keyup(function(event) {
+	if(event.which === 13) {
+		alert("use enter!");
+	}
+});
+
+
+
+//set ajax
+$("#load").ajaxStart(function() {
+	showLoading();
+	disableButtons();
+}).ajaxComplete(function() {
+	hideLoading();
+	enbleButtons();
+});
+
+
+//use $.proxy
+$("#panel").fadeIn(function() {
+	$("#panel button").click($.proxy(function() {
+		$(this).fadeOut();
+	},this));//set context
+})
+
+
 //
 
-
 	</script>
+
 </body>
 </html>
