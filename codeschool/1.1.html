@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div  data-title="use data">
+  	<button id="set">set</button>
+  	<button id="get">get</button>
+  </div>
+
+  <div id="div">
+  	<h5>button</h5>
+  	<button>click</button>
+  </div>
+
+
+	<script>
+    /*children:find(selector),children(selector)*/
+    $("#main li");$("#main > li");
+    //better and faster:
+    $("#main").find("li");$("#main").children('li');
+		/*parent:parent(),parents(selector),closest(selector)*/
+    
+
+
+
+    /*first(),last()*/
+    $("#main li:first"); //some with "last"
+    //better: 
+    $("main").find("li").first();  //last();
+     
+    
+
+    
+
+    /*filter*/
+    $("#main.onsale");
+    //better:
+    $("#main").filter(".onsale");
+
+
+
+
+    /*use on(event,handler)*/
+    $("button").click(function(event) {
+    	/* Act on the event */
+    });
+    //better:
+    $("button").on("click",function() {
+
+    });
+    //better:
+    $("#div").on("click","button",function() {
+    	var message = "<span>click now!</span>";
+    	$(this).after(message).remove();
+    });
+
+
+
+
+    /*use data()*/
+    $("#set").on("click",function() {
+    	$(this).parent().data("title","data has changed");
+    });
+    $("#get").on("click",function() {
+    	$(this).after($(this).parent().data("title")).remove();
+    });
+   
+
+
+
+    /**/
+    
+	</script>
+</body>
+</html>
