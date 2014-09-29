@@ -55,9 +55,94 @@
       	});
 
       
+     /*ajax*/
+     $("#file").on("click","button",function() {
+     		$.ajax("/photos.html",{
+     			success: function(res) {
+     				$(".photos").html(res).fadeIn();
+     			}
+     		})
+     });
+    
 
-     
+
+    //send data
+     $("#file").on("click","button",function() {
+     		$.ajax("confirmation.html?confNum=1234",{
+     			success: function(res) {
+     				$(".photos").html(res).fadeIn();
+     			}
+     		})
+     });
+
+     //better:
+     $("#file").on("click","button",function() {
+     		$.ajax("confirmation.html",{
+     			data: {"confNum":1234},
+     			success: function(res) {
+     				$(".photos").html(res).fadeIn();
+     			}
+     		})
+     });
+
+   
+
+   
+
+   //some func
+   $("#file").on("click","button",function() {
+     		$.ajax("confirmation.html",{
+     			data: {"confNum":1234},
+     			success: function(res) {},
+     			error: function(req,errorType,errorMessage) {},
+     			timeout:3000, //becase diferent req will spen differe time, so set a timeout
+          beforeSend: function() {
+          	$(".confirmation"),addClass('is-loading'); //can use this to set loading style
+          },
+          complete: function() {
+          	$(".confirmation").removeClass("is-loading");
+          }
+     		})
+     });
+
+    //
+    $(document).ready(function() {
+      function showPhotos() {
+        $(this).find('span').slideToggle();
+      }
+      $('.photos').on('mouseenter', 'li', showPhotos)
+                  .on('mouseleave', 'li', showPhotos);
+
+      var el = $("#tour");
+      el.on("click", "button", function() {
+        $.ajax('/photos.html', {
+          data: {location: el.data('location')},
+          success: function(response) {
+            $('.photos').html(response).fadeIn();
+          },
+          error: function() {
+            $('.photos').html('<li>There was a problem fetching the latest photos. Please try again.</li>');
+          },
+          timeout: 3000,
+          beforeSend: function() {
+            $('#tour').addClass('is-fetching');
+          },
+          complete: function() {
+            $('#tour').removeClass('is-fetching');
+          }
+        });
+      });
+    });
+
+
+
+    /*get:(url,success)*/
+    $("#file").on("click","button",function() {
+    	$get("/photos.html",function(res) {
+    		$(".photos").html(res).fadeIn();
+    	})
+    });
+
 	</script>
-	<script src="http://127.0.0.1:81/_/js/reloader.js"></script>
 </body>
 </html>

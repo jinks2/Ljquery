@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ 
+	</style>
+</head>
+<body>
+	
+	<script>
+   /*$.each and $.map*/
+   var cities = ["Paris","Lodon","Orlando"];
+   $.each(cities, function(index, city) {
+   	var result = city + " " + index;
+   	console.log(this,result); //this = new String(city[index]); 
+   });
+   $.map(cities, function(city,index) {
+   	var result = city + " " + index;
+   	console.log(this,result); //this = window;
+   });
+
+   /*$.getJSON*/
+
+   $(".update-flight-status").on("click", function() {
+   	 $.getJSON("/status", function(result) {
+   	 	 var statusElements = $.map(result, function(status, i) {
+   	 	 	  var listItem = $("<li></li>");
+   	 	 	  $("<h3>" + status.name + "</h3>").appendTo(listItem);
+   	 	 	  $("<p>" + status.status + "</p>").appendTo(listItem);
+   	 	 	  return listItem;
+   	 	 });
+   	 	 $(".status-list").detach().html(statusElements).appendTo('.status');
+   	 })
+   })
+
+	</script>
+
+
+	<script src="http://127.0.0.1:81/_/js/reloader.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ 
+	</style>
+</head>
+<body>
+	
+	<script>
+     /*ajax with post*/
+   $("form").on("submit",function(event) {
+   	 event.preventDefault(); //submit will reflash the page
+     var form = $(this);
+     $.ajax("/book", {
+     	type: "POST",
+     	data: form.serialize(), //use this;
+     	success: function(result) {
+     		form.remove();
+     		$("#vacation").hide().html(result).fadeIn();
+     	}
+     });
+   });
+
+
+
+
+    /*ajax with json*/
+    $("form").on("submit",function(e) {
+    	event.preventDefault(); //submit will reflash the page
+      var form = $(this);
+      $.ajax($("form").attr("action"), { //form action is sanme with the url;
+      	type: "POST",
+      	contentType: "application/json",
+      	data: form.serialize(), //use this;
+      	success: function(result) {
+      		form.remove();
+      		var msg = $("<p></p>");
+      		msg.append("Destination: " + result.location + ".");
+      		msg.append("Price: " + result.totalPrice + ". ");
+      		msg.append("Nights: " + result.nights + ". ");
+      		msg.append("Confirmation: " + result.Confirmation + ". ");
+      		$("#vacation").hide().html(msg).fadeIn();
+      	}
+      });
+    });
+
+    //anthor example:
+    $(document).ready(function() {
+      $('form').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax($('form').attr('action'), {
+          type: $('form').attr('method'),
+          data: $('form').serialize(),
+          dataType: 'json',
+          success: function(response) {
+            $('.tour').html('<p></p>')
+                      .find('p')
+                      .append('Trip to ' + response.description)
+                      .append(' at $' + response.price)
+                      .append(' for ' + response.nights + ' nights')
+                      .append('. Confirmation: ' + response.confirmation);
+          }
+        });
+      });
+    });
+
+
+   /*json with one
+    {
+    	"image": "",
+    	"name": " ",
+    }
+  */
+
+  $("button").on("click",function() {
+  	$.ajax("/cities/favorite/1", {
+  		contentType: "application/json",
+  		dataType:'json',
+  		success: function(result) {
+  			var favorite = $(".favorite");
+  			favorite.find("p").html(result.name);
+  			favorite.find("img").attr("src",result.image);
+  		}
+  	})
+  });
+
+
+
+  /*json with more
+  {
+		{
+			"image":"",
+			"name":"",
+  	},
+  	{
+			"image":"",
+			"name":"",
+  	},
+  	{
+			"image":"",
+			"name":"",
+  	}
+  }
+  */
+
+
+  /*html:
+  <div class="favorite-0">
+  	
+  </div>
+  <div class="favorite-1">
+  	
+  </div>
+  <div class="favorite-2">
+  	
+  </div>
+  */
+
+
+  $("button").on("click",function() {
+  	$.ajax("/cities/favorite/1", {
+  		contentType: "application/json",
+  		dataType:'json',
+  		success: function(result) {
+  			$.each(result, function(index,city) { //use each,  accroding "index"
+  				var favorite = $(".favorite-" + index);
+  				favorite.find("p").html(city.name);
+  				favorite.find("img").attr("src",city.image);
+  			});
+  		}
+  	})
+  });
+
+
+
+
+/*$.map :use for array*/
+var myNumbers = [1,2,3,4];
+var newNumbers = $.map(myNumbers, function(item,index) {
+	return item + 1;
+});
+console.log(newNumbers);
+
+/*json in  array
+  [
+		{
+			"image":"",
+			"name":"",
+  	},
+  	{
+			"image":"",
+			"name":"",
+  	},
+  	{
+			"image":"",
+			"name":"",
+  	}
+  ]
+  */
+	</script>
+
+
+
+</body>
+</html>
