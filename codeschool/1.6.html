@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+    .container{
+    	margin-top: 100px;
+    }
+    .top{
+    	margin-bottom: 50px;
+    }
+    .vacation{
+    	height: 250px;
+    	position: relative;
+    }
+    .no-hide{
+    	margin-top: 30px;
+    	display: none;
+    	position: absolute;
+    	top:50%;
+    	left:50%;
+    }
+    .vacation:hover .no-hide{
+			display: inline-block;
+    }
+
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="col-sm-12 top">
+		<button id="all" class="btn btn-primary col-sm-offset-10 show-price">show all</button>
+	</div>
+	<div class="jumbotron col-sm-3 vacation" data-price="110">
+		<h4>Hawaiian Vaction</h4>
+		<button class="click btn btn-info">SHOE PRICE</button>
+		<p class="no-hide"><a href="#" class="remove-vacation">no thanks!</a></p>
+	</div>
+
+	<div class="jumbotron col-sm-3 col-sm-offset-1 vacation" data-price="150">
+		<h4>European Getaway</h4>
+		<button class="click btn btn-info">SHOE PRICE</button>
+		<p class="no-hide"><a href="#" class="remove-vacation">no thanks!</a></p>
+	</div>
+
+	<div class="jumbotron col-sm-3 col-sm-offset-1 vacation" data-price="90">
+		<h4>Visit Japan</h4>
+		<button class="click btn btn-info">SHOE PRICE</button>
+		<p class="no-hide"><a href="#" class="remove-vacation">no thanks!</a></p>
+	</div>
+</div>	
+	<script>
+      $.fn.pricefy = function(options) {
+      	this.each(function() {
+      		var settings = $.extend({
+      			days: 3,
+      			vacation: $(this),
+      			price: $(this).data("price")
+      		},options);
+      		var show = function() {
+      			var details = $("<p>Book" + settings.days +"days for $" + (settings.days * settings.price)+  "</p>");
+      			settings.vacation.find(".click").hide();
+      			settings.vacation.append(details);
+      		};
+      		var remove = function() {
+      			settings.vacation.hide().off(".pricefy");
+      		};
+      		settings.vacation.on("click.pricefy","button",show);
+      		settings.vacation.on("show.pricefy",show);
+      		settings.vacation.on("click.pricefy",".remove-vacation",remove);
+      	})
+      };
+
+      $(function() {
+      	$(".vacation").pricefy();
+      	$(".show-price").on("click",function(event) {
+      		event.preventDefault();
+      		$(".vacation").trigger('show.pricefy');
+      	});
+      });
+
+	</script>
+
+<script src="http://127.0.0.1:81/_/js/reloader.js"></script>
+</body>
+</html>

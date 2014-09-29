@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../lib/jquery-1.9.0.min.js"></script>
+	<script src="../lib/bootstrap.min.js"></script>
+	<style>
+ 
+	</style>
+</head>
+<body>
+	
+	<script>
+      /*better ajax,better callback*/
+      //old way:
+      $.ajax({
+      	url: "test.html",
+      	success: function() {},
+      	error: function() {}
+      });
+     //better:
+     $.ajax("test.html").done(function() {}).fail(function() {});
+     //also:
+     $.ajax("test.html").done(function() {}).fail(function() {}).done(function() {});
+
+
+
+   /*use when,set one function for more ajax*/
+   $.when($.ajax("test1.html"),$.ajax("test2.html"))
+   .done(function() {}).fail(function() {});
+
+
+   //use when must past deferred object
+   var dtd = $.Deferred();
+   var wait = function(dtd) {
+   	var tasks = function() {
+   		alert("ok");
+   		dtd.resolve(); 
+   		/*resolve: no complieted -> complieted; will call done
+   		  reject: no complieted -> fail; will call fail
+   		  no complieted: waiting or call progress;
+   		 */
+   	};
+   	setTimeOut(tasks,5000);
+   	return dtd;
+   };
+   $.when(wait(dtd))
+   .done(function() {}).fail(function() {});
+   
+
+   //better: prevent change status
+   var dtd = $.Deferred();
+   var wait = function(dtd) {
+   	 var tasks = function() {
+   	 	alert("ok");
+   	 	dtd.resolve();
+   	 };
+   	 setTimeOut(tasks,5000);
+   	 return dtd.promise();
+   }
+   var d = wait(dtd);//now d can't use resolve or reject to change status
+   $.when(d).done(function() {}).fail(function() {});
+
+   //also can use more better to set dtd in wait function;
+   //other way:
+   var wait = function(dtd){
+   　　var tasks = function(){
+   　　　　alert("ok");
+   　　　　dtd.resolve();
+   　　};
+   　　setTimeout(tasks,5000);
+   　　return dtd.promise();
+   　　};
+   $.Deferred(wait).done(function() {}).fail(function() {});
+
+
+	</script>
+</body>
+</html>

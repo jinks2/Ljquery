@@ -39,9 +39,69 @@
    	 })
    })
 
+
+
+
+  
+
+
 	</script>
+   <button id="btn1">click1</button>
+   <button id="btn2">click2</button>
+   <button id="btn3">click3</button>
+   <button id="btn4">click4</button>
+   
+   <script>
+   /*off*/
+   function picture() {console.log("Show Plane")};
+   function status() {console.log("In Service")}; 
+   $(function() {
+     $("#btn1").on("click",picture);
+     $("#btn1").on("click",status);
+     $("#btn1").off("click");
+   });
 
 
-	<script src="http://127.0.0.1:81/_/js/reloader.js"></script>
+
+  /*use namespace*/
+  $(function() {
+    $("#btn2").on("click.pic",picture);
+    $("#btn2").on("click.stat",status);
+    $("#btn2").off("click.pic");
+
+
+    $("#btn3").on("click.pic",picture);
+    $("#btn3").on("click.stat",status);
+    $("#btn3").on("mouseover.stat",status);
+    $("#btn3").off(".stat");
+  });
+
+
+
+   /*use trigger*/
+  $(function() {
+   $("#btn4").on("click",function() {
+      picture();
+      $("#btn2").trigger("click");
+   });
+  });
+   </script>
+   <div data-price="123"></div>
+   <button id="btn5">click</button>
+
+
+  <script>
+  //$(dom element).on("<event>.>namespace>",<method>);
+
+  $("div").on("exam.new",function() {
+   console.log($(this).data());
+  });
+  $("#btn5").on("click.pict",function() {
+      picture();
+      $("div").trigger("exam.new");
+  });
+
+ 
+  </script>
 </body>
 </html>
