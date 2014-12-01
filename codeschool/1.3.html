@@ -52,31 +52,31 @@
      /*ajax code more clear:use Function*/
      //due to using object is limited to 1 confirmation on page, can use Function
 
-     function Confirmation(ele) {
-     	this.ele = ele;
-     	this.ticket = this.ele.find(".ticket");
-     	var confirmation = this;
-     	this.loadConfirmation = function() {
-     		$.ajax("confirmation.html", {
-     			timeoOut: 3000,
-     			context: confirmation,//"this" in the function;
-     			success: function(res) {
-     				this.ticket.html(res).slideDown();
-     			}
-     	};
-     	this.showBoardingPass = function(event) {
-     		event.preventDefault();
-     		$(this).hide();
-     		confirmation.find(".boarding-pass").show();
-     	};
-     	this.ele.on("click","button",this.loadConfirmation);
-     	this.ele.on("click","view-boarding-pass",this.showBoardingPass);
+      function Confirmation(ele) {
+        this.ele = ele;
+        this.ticket = this.ele.find(".ticket");
+        var confirmation = this;
+        this.loadConfirmation = function() {
+          $.ajax("confirmation.html", {
+            timeoOut: 3000,
+            context: confirmation,//"this" in the function;
+            success: function(res) {
+              this.ticket.html(res).slideDown();
+            }
+        });
+        this.showBoardingPass = function(event) {
+          event.preventDefault();
+          $(this).hide();
+          confirmation.find(".boarding-pass").show();
+        };
+        this.ele.on("click","button",this.loadConfirmation);
+        this.ele.on("click","view-boarding-pass",this.showBoardingPass);
+       }
      }
-
-     $(function() {
-     	var paris = new Confirmation($("#paris"));
-     	var london = new Confirmation($("#london"));
-     });
+      $(function() {
+        var paris = new Confirmation($("#paris"));
+        var london = new Confirmation($("#london"));
+      });
    
    //another example
 	function Tour(el) {

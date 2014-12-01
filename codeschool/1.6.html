@@ -57,6 +57,7 @@
 	<script>
       $.fn.pricefy = function(options) {
       	this.each(function() {
+          //使用$.extend添加属性；setting为要操作的数据集合
       		var settings = $.extend({
       			days: 3,
       			vacation: $(this),
@@ -86,6 +87,5 @@
 
 	</script>
 
-<script src="http://127.0.0.1:81/_/js/reloader.js"></script>
 </body>
 </html>

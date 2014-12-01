@@ -97,7 +97,7 @@
      			error: function(req,errorType,errorMessage) {},
      			timeout:3000, //becase diferent req will spen differe time, so set a timeout
           beforeSend: function() {
-          	$(".confirmation"),addClass('is-loading'); //can use this to set loading style
+          	$(".confirmation").addClass('is-loading'); //can use this to set loading style
           },
           complete: function() {
           	$(".confirmation").removeClass("is-loading");
